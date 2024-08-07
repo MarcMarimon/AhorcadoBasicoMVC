@@ -1,0 +1,30 @@
+﻿@model AhorcadoMVC.Models.HangmanModel
+@{
+    ViewData["Title"] = "Hangman Game";
+}
+
+<h1>Hangman Game</h1>
+
+<div>
+    <img src="@Model.HangmanImage" alt="Hangman Image" />
+</div>
+
+<div>
+    <p>@Model.DisplayWord</p>
+</div>
+
+@if (!Model.IsGameOver)
+{
+    <form asp-action="Guess" method="post">
+        <label for="letter">Enter a letter:</label>
+        <input type="text" id="letter" name="letter" maxlength="1" required />
+        <button type="submit">Guess</button>
+    </form>
+}
+else
+{
+    <p>Game Over! The word was: @Model.WordToGuess</p>
+    <form asp-action="StartNewGame" method="post">
+        <button type="submit">Start New Game</button>
+    </form>
+}
